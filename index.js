@@ -2,10 +2,6 @@ const { DocumentProcessorServiceClient } = require('@google-cloud/documentai').v
 const fs = require('fs');
 
 /**
- * Runs the sample document through Document AI to get key/value pairs and
- * confidence scores.
- */
-/**
  * Extract form data and confidence from processed document.
  */
 function extractFormData(document) {
@@ -48,6 +44,7 @@ function extractFormData(document) {
 
     return formData;
 }
+
 async function processDocument(projectId, location, processorId, filePath, mimeType) {
     // Instantiates a client
     const documentaiClient = new DocumentProcessorServiceClient();
@@ -95,10 +92,10 @@ async function main() {
     mimeType = 'application/pdf';
 
     const document = await processDocument(projectId, location, processorId, filePath, mimeType);
-    console.log("Document Processing Complete");
+    const formData = extractFormData(document);
 
-    // Print the document text as one big string
-    console.log(`Text: ${document.text}`);
+    console.log('\nThe following form key/value pairs were detected:');
+    console.log(formData);
 }
 
 main(...process.argv.slice(2)).catch(err => {
