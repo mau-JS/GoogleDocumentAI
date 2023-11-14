@@ -23,13 +23,16 @@ app.post('/webhook', async (req, res) => {
     const document = await processDocument(projectId, location, processorId, filePath);
     console.log(document);
 
+    // Extract entities from the document
+    const entities = document.entities.map(entity => `${entity.type}: ${entity.mentionText}`);
+
     // Create a Dialogflow-compatible response
     const dialogflowResponse = {
         fulfillmentMessages: [
             {
                 text: {
                     text: [
-                        'Document processed successfully!'
+                        `${entities.join(', ')}.`
                     ]
                 }
             }
