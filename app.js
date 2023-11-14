@@ -23,7 +23,20 @@ app.post('/webhook', async (req, res) => {
     const document = await processDocument(projectId, location, processorId, filePath);
     console.log(document);
 
-    res.json({ fulfillmentText: 'Document processed successfully!', document: document });
+    // Create a Dialogflow-compatible response
+    const dialogflowResponse = {
+        fulfillmentMessages: [
+            {
+                text: {
+                    text: [
+                        'Document processed successfully!'
+                    ]
+                }
+            }
+        ]
+    };
+
+    res.json(dialogflowResponse);
 });
 
 async function processDocument(projectId, location, processorId, filePath) {
