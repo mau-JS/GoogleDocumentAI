@@ -18,7 +18,7 @@ app.post('/webhook', async (req, res) => {
     const filePath = '1_updated_ConstanciaFiscalOECG.pdf';
     const projectId = 'documentprincipal';
     const location = 'us';
-    const processorId = '69de61eeb827ed15';
+    const processorId = 'ec2a4b2ae9b1054e';
 
     const document = await processDocument(projectId, location, processorId, filePath);
     console.log(document);
