@@ -28,15 +28,15 @@ app.post('/webhook', async (req, res) => {
 
     // Create a Dialogflow-compatible response
     const dialogflowResponse = {
-        fulfillmentMessages: [
-            {
-                text: {
-                    text: [
+        "fulfillment_response": {
+            "messages": [{
+                "text": {
+                    "text": [
                         `${entities.join(', ')}.`
                     ]
                 }
-            }
-        ]
+            }]
+        }
     };
 
     res.json(dialogflowResponse);
